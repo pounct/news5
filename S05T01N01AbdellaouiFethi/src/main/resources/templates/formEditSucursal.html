@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Introduint Sucursal</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href=@{../css/bootstrap.min.css} />
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href=@{../css/style.css} />
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="col-md-6 col-xs-12 espaciotop">
+			<div class="card">
+				<div class="card-header ">Editar Sucursal : </div>
+				<div class="card-body">
+					<form th:action=@{guardar} method="post">
+						<div class="form-group">
+							<label class="control-label">Id :</label>
+							<input class="form-control" type="text" name="pk_SucursalID" th:value=${sucursal.pk_SucursalID} />
+							<span class="rojo" th:errors=${sucursal.pk_SucursalID}></span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Nom :</label>
+							<input class="form-control" type="text" name="nomSucursal" th:value=${sucursal.nomSucursal} />
+							<span class="rojo" th:errors=${sucursal.nomSucursal}></span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Pais :</label>
+							<input class="form-control" type="text" name="paisSucursal"
+								th:value=${sucursal.paisSucursal} />
+							<span class="rojo" th:errors=${sucursal.paisSucursal}></span>
+						</div>
+						<div>
+							<button type="submit" class="btn btn-primary">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

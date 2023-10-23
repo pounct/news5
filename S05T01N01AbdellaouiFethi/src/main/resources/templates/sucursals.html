@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Sucursals</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href=@{../css/bootstrap.min.css} />
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href=@{../css/style.css} />
+
+</head>
+
+<body>
+
+
+	<div layout:fragment="content">
+		<section class="container">
+			<form th:action="@{getAll}" method="get">
+				<label for="sucsearch">Paraula clau: </label>
+				<input type="search" id="sucsearch" name="pc" th:value="${pc}" />
+				<button class="btn btn-primary">Cercar</button>
+			</form>
+		</section>
+		<section class="container">
+			<h3>Llista de Sucursals</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Pais</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each=s:${llistaSucursals}>
+						<td th:text=${s.pk_SucursalID}></td>
+						<td th:text=${s.nomSucursal}></td>
+						<td th:text=${s.paisSucursal}></td>
+						<td><a onclick="return confirm('estàs segur')"
+								th:href=@{delete(id=${s.pk_SucursalID},page=${paginaActual},size=${size},pc=${pc})}>ELIMINAR
+							</a>
+						</td>
+						<td><a th:href=@{edit(id=${s.pk_SucursalID})}>EDITAR</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<nav class="navbar navbar-expand-sm bg-light">
+			<ul class="nav nav-pills">
+				<li class=class="nav-item" th:each=pa,status:${pages}>
+					<a th:class="${paginaActual}==${status.index}?'nav-link active':'nav-link'"
+						th:href=@{getAll(page=${status.index},size=${size},pc=${pc})} th:text=${status.index}></a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</body>
+
+</html>
